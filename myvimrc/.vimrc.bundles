@@ -5,10 +5,23 @@ call vundle#rc()
 " Define bundles via Github repos "
 Bundle 'VundleVim/Vundle.vim'
 "Bundle 'christoomey/vim-run-interactive'
-Bundle 'croaky/vim-colors-github'
 Bundle 'danro/rename.vim'
 Bundle 'pbrisbin/vim-mkdir'
+
+"tagbar start
+"replace taglist"
 Bundle 'majutsushi/tagbar'
+"nmap <Leader>tb :TagbarToggle<CR>       "快捷键设置
+let g:tagbar_ctags_bin='ctags'          "ctags程序的路径
+let g:tagbar_width=30                   "窗口宽度的设置
+let g:tagbar_left = 1
+let g:tagbar_autoshowtag = 2
+"let g:tagbar_autofocus = 1
+"map <F3> :Tagbar<CR>
+"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx :TagbarOpen   "如果是c语言的程序的话，tagbar自动开启
+autocmd FileType c,cpp,h TagbarOpen
+"tagbar end
+
 "Bundle 'kchmck/vim-coffee-script'
 "Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
@@ -32,14 +45,44 @@ Bundle 'bling/vim-airline'
 
 "Bundle 'godlygeek/tabular'
 "Bundle 'jelera/vim-javascript-syntax'
+
+
+"[------Color Scheme------]
+syntax enable
+"molokai start
+Bundle 'tomasr/molokai'
+let g:molokai_original = 1
+"molokai end
+
+"solarized start
 Bundle 'altercation/vim-colors-solarized'
+"if has('gui_running')
+"	set background=light
+"else
+"	set background=dark
+"endif
+"colorscheme solarized
+"solarized end
+
+"colors-github start
+Bundle 'croaky/vim-colors-github'
+"colorscheme github
+"if you use airline / lightline
+"let g:airline_theme = "github"
+"let g:lightline = { 'colorscheme': 'github'  }
+"colors-github end
+"[------Color Scheme------]
+
 "Bundle 'othree/html5.vim'
 "Bundle 'xsbeats/vim-blade'
 "Bundle 'Raimondi/delimitMate'
 "Bundle 'groenewege/vim-less'
 "Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tomasr/molokai'
-Bundle 'klen/python-mode'
+"[------python------]
+"Bundle 'klen/python-mode'
+"Plug 'python-mode/python-mode',{ 'branch': 'develop'}
+"[------python------]
+
 "YCM start"
 "YCM has to install ultisnips&vim-snippets!!!"
 Bundle 'Valloric/YouCompleteMe'
@@ -48,7 +91,6 @@ Bundle 'honza/vim-snippets'
 Bundle 'garbas/vim-snipmate'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-Bundle 'jiangmiao/auto-pairs'
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
@@ -59,7 +101,12 @@ Bundle 'jiangmiao/auto-pairs'
 let g:UltiSnipsEditSplit="vertical"
 
 " add supertab to resolve YCM&ultisnips conflict!!!
+ 
+"supertab start
 Bundle 'ervandew/supertab'
+let g:SuperTabRetainCompletionType=2
+"supertab end
+
 " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -73,6 +120,31 @@ let g:ycm_confirm_extra_conf = 0		" 允许 vim 加载 .ycm_extra_conf.py 文件�
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments=1		" 补全功能在注释中同样有效"
 let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全"
+let g:ycm_max_diagnostics_to_display=0
 "YCM end"
+
 Plugin 'mbbill/echofunc'
-"Bundle 'evanmiller/nginx-vim-syntax'"
+"minibufexpl start
+Plugin 'fholgado/minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1   
+let g:miniBufExplMapWindowNavArrows = 1   
+let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplMoreThanOne=0
+map <F11> :MBEbp<CR>
+map <F12> :MBEbn<CR>
+"minibufexpl start"
+
+"auto-pairs start
+"Bundle 'jiangmiao/auto-pairs'
+"let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"'}
+"let g:AutoPairs['<']='>'
+"let b:AutoPairs = g:AutoPairs
+"auto-pairs end
+
+inoremap ' ''<ESC>i
+inoremap < <><ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O

@@ -12,7 +12,8 @@ set softtabstop=4
 set shiftwidth=4
 set noexpandtab
 set autoindent
-:%retab
+:%retab!
 set incsearch
+set hlsearch
 set tags+=~/.vim/systags
 set tags+=./tags	"add current directory’s generated tags file"
